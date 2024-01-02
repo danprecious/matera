@@ -15,6 +15,13 @@
   */
 }
 
+.my-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+  justify-items: center;
+  gap: 2em;
+  color: black;
+}
 
 /* ::-webkit-scrollbar-track{
 

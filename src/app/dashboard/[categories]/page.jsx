@@ -1,20 +1,26 @@
-import React from "react";
+import {Suspense} from "react";
 
-import { FetchData, GetMaterials } from "@/utils/apiCall";
-import Materials from "@/_local-components/materialSection";
+import { GetMaterials } from "@/utils/apiCall";
+import Categories from "@/_local-components/Categories";
 
-const Categories = async ({data}) => {
-  const response = await GetMaterials();
-  console.log(response)
-  
+const MaterialSection = async () => {
+    
   return (
-    <div className="md:mt-12  w-[100%] p-5">
-      This is the Categories page {response[0].title}
-      <Materials />
+    <div className="w-[100%]">
+        <Suspense fallback={<FallBacK />}>
+          <Categories header="Material" countNumber={20}/>
+        </Suspense>
     </div>
+    
   );
 };
+ 
+const FallBacK = () =>{
+  return(
+    <div className="text-center">Fetching data, please hold on a bit...</div>
+  )
+}
 
-export default Categories;
+export default MaterialSection;
 
 

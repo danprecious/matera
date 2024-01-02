@@ -11,9 +11,9 @@ const menuItems = [
     href: "/dashboard",
     icon: <BiSolidDashboard />
   },
-  { title: "Your Collection", href: "/dashboard/" },
-  { title: "Session Library", href: "/dashboard" },
-  { title: "Saved Materials", href: "/dashboard" },
+  { title: "Your Collection", href: `/dashboard/` },
+  { title: "Session Library", href: `/dashboard` },
+  { title: "Saved Materials", href: `/dashboard` },
 ];
 
 const SideBar = () => {

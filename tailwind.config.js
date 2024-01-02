@@ -13,6 +13,7 @@ module.exports = {
         secondary: "rgb(247, 107, 107)",
         accent: "rgb(233, 230, 230)",
         bg: "white",
+        bgdark: "black",
       },
     },
   },

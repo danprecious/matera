@@ -1,28 +1,21 @@
-"use client"
+"use client";
 
 import React, { createContext, useReducer, useState } from "react";
 import { reducer } from "./reducer";
-import { FetchData } from "./apiCall";
-
 
 export const StateContext = React.createContext();
 
-export const ContextProvider = ({ children }) => {  
-
-  
-  
+export const ContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(true);
-    const defaultState = {
-        navOpen: false
-    }
-    
-    const [state, dispatch] = useReducer(reducer, defaultState)
+  const defaultState = {
+    navOpen: false,
+  };
+
+  const [state, dispatch] = useReducer(reducer, defaultState);
 
   return (
-    <>
-      <StateContext.Provider value={{isAuth, setIsAuth, state, dispatch}}>{children}</StateContext.Provider>
-    </>
+    <StateContext.Provider value={{ isAuth, setIsAuth, state, dispatch }}>
+      {children}
+    </StateContext.Provider>
   );
 };
-
-

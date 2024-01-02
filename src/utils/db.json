@@ -3,7 +3,7 @@
     {
       "id": "1",
       "title": "Mechatronics",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["mechanical engineering", "engineering"]
@@ -11,7 +11,7 @@
     {
       "id": "2",
       "title": "Electrical machines",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["electrical and electronics engineering", "engineering", "electrical"]
@@ -19,7 +19,7 @@
     {
       "id": "3",
       "title": "Wireless networks",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["mechanical engineering", "engineering"]
@@ -27,7 +27,7 @@
     {
       "id": "4",
       "title": "Basic Electrical Circuits",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["electrical and electronics engineering", "engineering", "electrical"]
@@ -35,7 +35,7 @@
     {
       "id": "5",
       "title": "Introductory Mechatronics",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["mechanical engineering", "engineering", "mechatronics"]
@@ -43,7 +43,7 @@
     {
       "id": "6",
       "title": "MATLAB",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["electrical and electronics engineering", "engineering", "electrical"]
@@ -51,7 +51,7 @@
     {
       "id": "7",
       "title": "Thermodynamics",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["mechanical engineering", "engineering"]
@@ -59,7 +59,7 @@
     {
       "id": "8",
       "title": "Structures",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["civil", "engineering"]
@@ -67,7 +67,7 @@
     {
       "id": "9",
       "title": "Strength of materials",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["civil engineering", "engineering"]
@@ -75,7 +75,7 @@
     {
       "id": "10",
       "title": "Material selection",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["engineering", "civil engineering"]
@@ -83,7 +83,7 @@
     {
       "id": "11",
       "title": "Control systems",
-      "class": "Enginnering",
+      "category": "Enginnering",
       "url": "",
       "thumbnail": "",
       "tags": ["mechanical engineering", "engineering", "mechatronics"]

@@ -15,8 +15,8 @@ const Dashboard = () => {
       <div className="">
         <Tabs />
       </div>
-      <div>
-        <Categories header="Recent Checks" />
+      <div className="my-14">
+        <Categories header="Recent Checks" countNumber={4}/>
       </div>
       <div className="md:flex p-4 md:justify-space-between">
         <MaterialList header="Check out.." />

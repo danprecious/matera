@@ -1,34 +1,21 @@
 import axios from "axios";
 
 
-export async function GetMaterials(response) {
-  try {
-     response = await axios.get("http://localhost:3000/materials");
-    if (response.status === 200) {
-      console.log("Data retrieved successfully:");
-      console.log(response.data);
-    } else {
-      console.error(`Unexpected status code: ${response.status}`);
-    }
-  } catch (error) {
-    if (error.response) {
-      console.error(
-        `Request failed with status code: ${error.response.status}`
-      );
-      console.error("Response data:", error.response.data);
-    } else if (error.request) {
-      console.error("No response received. Check your network connection.");
-    } else {
-      console.error("Error:", error.message);
-    }
-  }
+export async function GetMaterials() {
+  
+     const response = await axios("http://localhost:3000/materials");
+      const data = await response.data;
+      // console.log(data)
+      
+      return data;
 }
 
 export const PostMaterials = async () => {
   try {
-    const post = await axios.post("");
+    const post = await axios.post(""); 
   } catch (error) {
     console.error(error);
+    return error;
   }
 };
 
