@@ -1,0 +1,92 @@
+{
+  "materials":[
+    {
+      "id": "1",
+      "title": "Mechatronics",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["mechanical engineering", "engineering"]
+    },
+    {
+      "id": "2",
+      "title": "Electrical machines",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["electrical and electronics engineering", "engineering", "electrical"]
+    },
+    {
+      "id": "3",
+      "title": "Wireless networks",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["mechanical engineering", "engineering"]
+    },
+    {
+      "id": "4",
+      "title": "Basic Electrical Circuits",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["electrical and electronics engineering", "engineering", "electrical"]
+    },
+    {
+      "id": "5",
+      "title": "Introductory Mechatronics",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["mechanical engineering", "engineering", "mechatronics"]
+    },
+    {
+      "id": "6",
+      "title": "MATLAB",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["electrical and electronics engineering", "engineering", "electrical"]
+    },
+    {
+      "id": "7",
+      "title": "Thermodynamics",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["mechanical engineering", "engineering"]
+    },
+    {
+      "id": "8",
+      "title": "Structures",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["civil", "engineering"]
+    },
+    {
+      "id": "9",
+      "title": "Strength of materials",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["civil engineering", "engineering"]
+    },
+    {
+      "id": "10",
+      "title": "Material selection",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["engineering", "civil engineering"]
+    },
+    {
+      "id": "11",
+      "title": "Control systems",
+      "category": "Enginnering",
+      "url": "",
+      "thumbnail": "",
+      "tags": ["mechanical engineering", "engineering", "mechatronics"]
+    }
+  ]
+}
