@@ -1,9 +1,10 @@
 "use client";
 
-
 import { login } from "@/app/actions/authenticate";
+import { performLogin } from "@/app/actions/login";
 
 import Logo from "@/components/nav/logo";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   FaArrowAltCircleDown,
@@ -14,6 +15,8 @@ import {
 } from "react-icons/fa";
 
 const SignInPage = () => {
+  const router = useRouter();
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -28,42 +31,28 @@ const SignInPage = () => {
   const handleChange = (e) => {
     e.preventDefault();
 
-
     console.log(e.target.value);
-    if (e.target.name === "email") {
-      setData({ ...data, email: e.target.value });
-    }
-    if (e.target.name === "password") {
-      setData({ ...data, password: e.target.value });
-      if (data.password === "" || data.password.length < 8) {
-        setError({ ...error, password: "Please enter a strong password" });
-      } else {
-        setSuccess(true);
-        setError({ ...error, password: "" });
-        // setTimeout(() => {
-        //   setSuccess(false);
-        // }, 3500);
-      }
-    }
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const signIn = (e) => {
     e.preventDefault();
     // get email regex validation
+    performLogin(e)
+      .then((result) => {
+        console.log(result);
 
-    if (data.email === "") {
-      setError({ ...error, email: "please enter a valid email" });
-    }
-
-    if (data.password.length < 9) {
-      console.log("kkk");
-      setError(() => ({
-        ...error,
-        password: "password length not strong enough",
-      }));
-    } else {
-      setError({ ...error, password: "" });
-    }
+        if (result) {
+          router.push('/dashboard');
+        }
+      })
+      .catch((e) => {
+        setError({ ...data, password: "incorrect password or email" });
+        setTimeout(() => {
+          setError({...data, password: ""})
+        }, 4000)
+        console.error(e);
+      });
   };
 
   return (
@@ -99,7 +88,7 @@ const SignInPage = () => {
                   <FaArrowDown />
                 </span>
               </p>
-              <form className="space-y-3 p-3">
+              <form className="space-y-3 p-3" onSubmit={(e) => signIn(e)}>
                 <div>
                   <label
                     htmlFor="email"
@@ -118,11 +107,7 @@ const SignInPage = () => {
                       className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
-                  {error.email && (
-                    <div className="text-red-500 font-semibold text-xs p-2">
-                      please fill out this field
-                    </div>
-                  )}
+                
                 </div>
 
                 <div>
@@ -153,13 +138,16 @@ const SignInPage = () => {
                       className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
-                  
+                  {error.password && (
+                    <div className="text-red-500 font-semibold text-xs p-2">
+                      {error.password}
+                    </div>
+                  )}
                 </div>
 
                 <div>
                   <button
                     type="submit"
-                    
                     className="flex w-full justify-center rounded-md bg-blue-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     Sign in

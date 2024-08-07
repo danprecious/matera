@@ -1,7 +1,13 @@
 "use client";
 
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import validator from "validator";
 import Logo from "@/components/nav/logo";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import axios from "axios";
 import {
   FaArrowAltCircleDown,
   FaArrowDown,
@@ -10,78 +16,68 @@ import {
 } from "react-icons/fa";
 
 const SignUpPage = () => {
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-    name: "",
-    confirmPassword: "",
-  });
+  const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [error, setError] = useState({
     email: "",
     password: "",
     name: "",
     confirmPassword: "",
-  });
-  const [success, setSuccess] = useState({
-    password: false,
-    confirmPassword: false,
+    general: "",
   });
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
+  const schema = z
+    .object({
+      name: z.string().min(1, { message: "Name is required" }),
+      email: z.string().email({ message: "Invalid email address" }),
+      password: z
+        .string()
+        .min(8, { message: "Password must be at least 8 characters long" })
+        .regex(/[A-Z]/, {
+          message: "Password must contain at least one uppercase letter",
+        })
+        .regex(/[a-z]/, {
+          message: "Password must contain at least one lowercase letter",
+        })
+        .regex(/[0-9]/, {
+          message: "Password must contain at least one number",
+        }),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: "Passwords do not match",
+      path: ["confirmPassword"],
+    });
 
-    if (e.target.name === "email") {
-      setData({ ...data, email: e.target.value });
-    }
-    if (e.target.name === "name") {
-      setData({ ...data, name: e.target.value });
-    }
-    if (e.target.name === "password") {
-      setData({ ...data, password: e.target.value });
-      if (data.password === "" || data.password.length < 8) {
-        setError({ ...error, password: "Please enter a strong password" });
-      } else {
-        setSuccess(true);
-        setError({ ...error, password: "" });
-        setTimeout(() => {
-          setSuccess({ ...success, password: false });
-        }, 1500);
-      }
-    }
-    if (e.target.name === "confirmPassword") {
-      setData({ ...data, confirmPassword: e.target.value });
-      if (data.confirmPassword !== data.password) {
-        setError({ ...error, confirmPassword: "Passwords don't match" });
-      } else {
-        setSuccess(true);
-        setError({ ...error, confirmPassword: "" });
-        setTimeout(() => {
-          setSuccess({ ...success, confirmPassword: false });
-        }, 1500);
-      }
-    }
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
 
-  const signUp = (e) => {
-    e.preventDefault();
-    // get email regex validation
+  const signUp = async (data) => {
+    console.log(data);
 
-    if (data.email === "") {
-      setError({ ...error, email: "please enter a valid email" });
-    }
-
-    if (data.password.length < 8) {
-      console.log("kkk");
-      setError(() => ({
+    try {
+      const response = await axios.post("/api/register", data, {
+        headers: {
+            "Content-type": "application/json",
+        },
+      });
+      router.push("/sign_in"); 
+      console.log(response);
+      return response;
+    } catch (e) {
+      setError({
         ...error,
-        password: "password length not strong enough",
-      }));
-    } else {
-      setError({ ...error, password: "" });
+        general: "User could not be created, try again later",
+      }),
+        setTimeout(() => setError({ ...error, general: "" }), 2000);
     }
-
-    
   };
 
   return (
@@ -103,7 +99,7 @@ const SignUpPage = () => {
               <div className="text-center p-2 my-2 bg-blue-200 flex justify-center rounded-full hover:bg-red-400">
                 <button
                   className="p-1 rounded-md flex"
-                  onClick={() => signIn("google")}
+                  // onClick={() => signIn("google")}
                 >
                   <FaGoogle className="" />
                 </button>
@@ -117,7 +113,35 @@ const SignUpPage = () => {
                   <FaArrowDown />
                 </span>
               </p>
-              <form className="space-y-3 p-3" onSubmit={signUp}>
+              <form className="space-y-3 p-3" onSubmit={handleSubmit(signUp)}>
+                {!!error.general && (
+                  <div className="text-red-500 font-semibold text-center text-xs p-2">
+                    {error.general}
+                  </div>
+                )}
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-xs mx-1 font-medium leading-6 text-gray-900"
+                  >
+                    Name
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      {...register("name")}
+                      className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                  {false && (
+                    <div className="text-red-500 font-semibold text-xs p-2">
+                      please fill out this field
+                    </div>
+                  )}
+                </div>
                 <div>
                   <label
                     htmlFor="email"
@@ -131,13 +155,12 @@ const SignUpPage = () => {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      value={data.email}
                       required
-                      onChange={(e) => handleChange(e)}
+                      {...register("email")}
                       className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
-                  {error.email && (
+                  {false && (
                     <div className="text-red-500 font-semibold text-xs p-2">
                       please fill out this field
                     </div>
@@ -158,31 +181,24 @@ const SignUpPage = () => {
                       id="password"
                       name="password"
                       type="password"
-                      value={data.password}
-                      onChange={(e) => handleChange(e)}
+                      {...register("password")}
                       required
                       className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
-                  {error.password && (
+                  {false && (
                     <div className="text-red-500 font-semibold text-xs p-2">
                       {error.password}
-                    </div>
-                  )}
-                  {success.password && (
-                    <div className="text-green-500 flex items-center font-semibold text-sm p-2">
-                      <FaCheck />
-                      <span className="ml-2">Password ok</span>
                     </div>
                   )}
                 </div>
                 <div>
                   <div className="flex items-center justify-between">
                     <label
-                      htmlFor="password"
+                      htmlFor="confirmPassword"
                       className="block mx-1 text-xs font-medium leading-6 text-gray-900"
                     >
-                      Confirm password
+                      Confirm Password
                     </label>
                   </div>
                   <div className="mt-1">
@@ -190,21 +206,14 @@ const SignUpPage = () => {
                       id="confirmPassword"
                       name="confirmPassword"
                       type="password"
-                      value={data.confirmPassword}
-                      onChange={(e) => handleChange(e)}
+                      {...register("confirmPassword")}
                       required
                       className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
-                  {error.confirmPassword && (
+                  {false && (
                     <div className="text-red-500 font-semibold text-xs p-2">
-                      {error.confirmPassword}
-                    </div>
-                  )}
-                  {success.confirmPassword && (
-                    <div className="text-green-500 flex items-center font-semibold text-sm p-2">
-                      <FaCheck />
-                      <span className="ml-2">Passwords match</span>
+                      {error.password}
                     </div>
                   )}
                 </div>
