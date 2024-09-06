@@ -2,7 +2,7 @@ import React from 'react'
 
 const SessionLibrary = () => {
   return (
-    <div>Session Library</div>
+    <div className='flex w-[100%] p-5 flex-col'>Session Library</div>
   )
 }
 

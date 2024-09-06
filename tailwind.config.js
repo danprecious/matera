@@ -4,20 +4,16 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  ], 
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       colors: {
-        primary: "rgb(98, 135, 236)",
-        secondary: "rgb(247, 107, 107)",
-        accent: "rgb(233, 230, 230)",
-        bg: "white",
-        bgdark: "black",
+        primary: "var(--primary-color)",
+        secondary: "var(--secondary-color)",
+        accent: "var(--aceent)",
+        bg: "var(--background-color)",
+        bgShade: "var(--background-shade)",
+        textcolor: "var(--text-color)", 
       },
     },
   },

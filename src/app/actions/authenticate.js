@@ -14,7 +14,7 @@ export const logout = async () => {
     revalidatePath('/')
 }
 
-
+    
 export const credentialLogin = async (formdata) => {
     const response = await signIn('credentials', {
         email: formdata.get('email'),

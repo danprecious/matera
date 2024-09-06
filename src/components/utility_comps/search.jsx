@@ -12,7 +12,7 @@ const SearchBar = () => {
 
   return (
     <input
-      className="text-center w-[100%] lg:mr-8  p-1 outline-zinc-400 border-zinc-300 border-solid border-[1px] rounded-[7px]"
+      className="text-center w-[100%] lg:mr-8  p-1 outline-bgShade border-bgShade  border-solid border-[1px] bg-transparent rounded-[7px]"
       type="text"
       placeholder="Search for a material..."
     />

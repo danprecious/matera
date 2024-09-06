@@ -13,7 +13,7 @@ const Material = () => {
   return (
     <div className="flex my-2">
       <div className="flex w-[95%]">
-        <div className="w-[50px] h-[50px] rounded-md bg-slate-200"></div>
+        <div className="w-[50px] h-[50px] rounded-md bgShade"></div>
         <div className="mx-2 flex place-items-center ">
           <p>Control systems</p>
         </div>

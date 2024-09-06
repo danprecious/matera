@@ -19,7 +19,7 @@ const menuItems = [
 
 const SideBar = () => {
   return (
-    <div className=" mr-5 w-[22%] rounded-[20px] hidden lg:flex md:flex-col justify-between">
+    <div className="w-[20%] rounded-[20px] hidden lg:flex md:flex-col justify-between">
       <div className="flex justify-center w-[100%] p-2 ">
         <Logo />
       </div>
@@ -30,9 +30,9 @@ const SideBar = () => {
       </div>
       
         <div className="flex justify-center hover:font-medium  rounded-md mb-5 p-3">
-          <button onClick={() => logout()} className="opacity-30 hover:opacity-100 font-semibold rounded-md py-2 px-3 w-[100%] text-center flex justify-center items-center">
+          <button onClick={() => logout()} className="opacity-30 hover:text-secondary hover:opacity-100 font-semibold rounded-md py-2 px-3 w-[100%] text-center flex justify-center items-center">
             <span className="px-2">Log out</span>
-            <BiLogOutCircle className="text-[1.5rem]" />
+            <BiLogOutCircle className="text-[1.5rem] " />
           </button>
         </div>
       

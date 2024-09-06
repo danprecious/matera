@@ -11,7 +11,7 @@ const Dashboard = () => {
           <Greeting />
         </div>
   
-        <div className="">
+        <div className="my-4 md:my-0">
           <Tabs />
         </div>
         <div className="lg:my-14 my-6">

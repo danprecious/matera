@@ -6,9 +6,9 @@ const UserName = async () => {
     const session = await auth();
 
   return (
-    <div>
+    <p className="text-secondary">
         {session?.user?.name ? <p>{session.user.name}</p> : "Error"}
-    </div>
+    </p>
   )
 }
 

@@ -108,7 +108,7 @@ const SignUpPage = () => {
 
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <p className="flex justify-center text-xs p-3 mt-4 font-medium items-center">
-                Or sign up{" "}
+                Or sign up with{" "}
                 <span className="px-1">
                   <FaArrowDown />
                 </span>

@@ -5,7 +5,7 @@ export const performLogin = async (e) =>{
     try {
         const formData = new FormData(e.currentTarget)
         const response = await credentialLogin(formData);
-
+        
         if(!!response.error){
             return response.error.message;
         }

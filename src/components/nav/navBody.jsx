@@ -28,7 +28,7 @@ export const NavBody = () => {
   return (
     <div>
       {navOpen ? (
-        <ul className="w-[100%] absolute md:right-[10px] rounded-[20px] right-0  z-50 min-w-[5em] max-w-[14em] top-12 bg-zinc-50 py-2">
+        <ul className="w-[100%] absolute md:right-[10px] rounded-lg right-0  z-50 min-w-[5em] max-w-[14em] top-16 bg-bgShade  py-2">
           <div className="text-left">
             {navItems.map(({ title, href }, index) => (
               <NavLink key={index} title={title} href={href} />

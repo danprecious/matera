@@ -8,21 +8,21 @@ import { redirect } from "next/navigation";
 export default async function DashbaordLayout({ children }) {
 
 
-  const session = await auth();
+  // const session = await auth();
 
-  if(!session?.user) {
-    redirect("/");
-  }
+  // if(!session?.user) {
+  //   redirect("/sign_up");
+  // }
 
   return (
     <main className="flex w-screen">
       <SideBar />
-      <div className="lg:w-[78%] w-[100%]">
+      <div className="lg:w-[80%] w-[100%]">
         <div className="sticky top-0">
           <Header />
         </div>
         <div className="w-[100%] h-[90vh] flex">
-          <div className=" lg:w-[77%] w-[100%] bg-bg overflow-scroll">
+          <div className=" lg:w-[77%] w-[100%]  overflow-scroll border-l  border-bgShade">
             {children}
           </div>
           <RightSidebar />
