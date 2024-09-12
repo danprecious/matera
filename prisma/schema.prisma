@@ -7,6 +7,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Tester {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  filename String
+  file     String
+}
+
 model User {
   id            String          @id @default(auto()) @map("_id") @db.ObjectId
   email         String          @unique
@@ -82,36 +88,46 @@ model Authenticator {
 }
 
 model Material {
-  id            String               @id @default(auto()) @map("_id") @db.ObjectId
-  title         String
-  description   String?
-  format        String
-  url           String
-  createdAt     DateTime             @default(now())
-  updatedAt     DateTime             @updatedAt
-  uploaderId    String               @db.ObjectId
-  uploader      User                 @relation(fields: [uploaderId], references: [id])
-  categories    MaterialCategory[]
-  pastQuestions PastQuestion?
-  collections   CollectionMaterial[]
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+
+  programme String
+  semester  String
+
+  materialType String
+  fileId       String             @db.ObjectId
+  file         File[]               
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  uploaderId   String?            @db.ObjectId
+  uploader     User?              @relation(fields: [uploaderId], references: [id])
+  categories   MaterialCategory[]
+
+  collections CollectionMaterial[]
+}
+
+model File {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  gridFsId  String
+  filename  String
+  mimetype  String
+  size      Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+
+  materialId   String   @db.ObjectId  // Reference to the material this file belongs to
+  material     Material @relation(fields: [materialId], references: [id])
 }
 
 model Category {
-  id            String                 @id @default(auto()) @map("_id") @db.ObjectId
-  name          String                 @unique
+  id            String             @id @default(auto()) @map("_id") @db.ObjectId
+  name          String             @unique
   materials     MaterialCategory[]
-  parentId      String?                @db.ObjectId
-  parent        Category?              @relation("Subcategories", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  subcategories Category[]             @relation("Subcategories")
-  pastQuestions PastQuestionCategory[]
-}
-
-model PastQuestion {
-  id         String                 @id @default(auto()) @map("_id") @db.ObjectId
-  year       Int
-  materialId String                 @unique @db.ObjectId
-  material   Material               @relation(fields: [materialId], references: [id])
-  categories PastQuestionCategory[]
+  parentId      String?            @db.ObjectId
+  parent        Category?          @relation("Subcategories", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  subcategories Category[]         @relation("Subcategories")
 }
 
 model Collection {
@@ -137,15 +153,6 @@ model MaterialCategory {
 }
 
 // Join table for many-to-many relation between PastQuestion and Category
-model PastQuestionCategory {
-  id             String       @id @default(auto()) @map("_id") @db.ObjectId
-  pastQuestionId String       @db.ObjectId
-  categoryId     String       @db.ObjectId
-  pastQuestion   PastQuestion @relation(fields: [pastQuestionId], references: [id], onDelete: Cascade)
-  category       Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
-  @@unique([pastQuestionId, categoryId])
-}
 
 model CollectionMaterial {
   id           String     @id @default(auto()) @map("_id") @db.ObjectId
