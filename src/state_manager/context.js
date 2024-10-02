@@ -9,6 +9,7 @@ export const ContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(true);
   const defaultState = {
     navOpen: false,
+    uploadModal: true
   };
 
   const [state, dispatch] = useReducer(reducer, defaultState);

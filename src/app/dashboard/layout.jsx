@@ -3,6 +3,7 @@ import Header from "@/components/nav";
 import RightSidebar from "@/components/layouts/right-sidebar";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import UploadForm from "@/components/upload/form";
 
 
 export default async function DashbaordLayout({ children }) {
@@ -16,6 +17,7 @@ export default async function DashbaordLayout({ children }) {
 
   return (
     <main className="flex w-screen">
+      <UploadForm />
       <SideBar />
       <div className="lg:w-[80%] w-[100%]">
         <div className="sticky top-0">

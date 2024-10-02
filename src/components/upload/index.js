@@ -1,10 +1,11 @@
 "use client";
 
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { StateContext } from "@/state_manager/context";
 
 const schema = z.object({
   file: z.any().refine((file) => file instanceof File, {
@@ -13,18 +14,21 @@ const schema = z.object({
 });
 
 const Upload = () => {
+  const { state, dispatch } = useContext(StateContext);
+  const { uploadModal } = state;
+
   const [testData, setTestData] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get("/api/fetch");
-      const { data } = response;
-      console.log(data);
-      setTestData(data);
-    }
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await axios.get("/api/fetch");
+  //     const { data } = response;
+  //     console.log(data);
+  //     setTestData(data);
+  //   }
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const { handleSubmit, register, control, formState } = useForm({
     resolver: zodResolver(schema),
@@ -37,8 +41,8 @@ const Upload = () => {
 
     const formData = new FormData();
 
-    formData.append('file', data.file)
-    
+    formData.append("file", data.file);
+
     try {
       const response = await axios.post(
         "http://localhost:3001/api/upload",
@@ -54,7 +58,6 @@ const Upload = () => {
     } catch (error) {
       console.error(error);
     }
-
   };
 
   return (
@@ -76,7 +79,7 @@ const Upload = () => {
         </div>
       </div>
       <div>
-        <form className="py-2" onSubmit={handleSubmit(handleUpload)}>
+        {/* <form className="py-2" onSubmit={handleSubmit(handleUpload)}>
           <Controller
             control={control}
             name="file"
@@ -91,13 +94,18 @@ const Upload = () => {
               />
             )}
           />
+        </form> */}
+        <div className="w-full">
           <button
-            type="submit"
-            className="bg-primary text-white rounded-md px-3 py-2 w-[100%] font-medium"
+            // type=""
+            onClick={() => {
+              dispatch({ type: "UPLOAD_MODAL", payload: !uploadModal });
+            }}
+            className="btn"
           >
             Upload
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

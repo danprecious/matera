@@ -5,4 +5,10 @@ export const reducer = (state, action) =>{
             navOpen : action.payload
         }
     }
+    if(action.type === "UPLOAD_MODAL"){
+        return {
+            ...state, 
+            uploadModal: action.payload
+        }
+    }
 }
